@@ -1,0 +1,28 @@
+projection;
+strict ( 2 );
+use draft;
+
+define behavior for ZC_PROC_HEAD_057 alias Header
+{
+  use create;
+  use update;
+  use delete;
+
+  use action approveOrder;
+
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
+
+  use association _Items { create; with draft; }
+}
+
+define behavior for ZC_PROC_ITEM_057 alias Item
+{
+  use update;
+  use delete;
+
+  use association _Header { with draft; }
+}

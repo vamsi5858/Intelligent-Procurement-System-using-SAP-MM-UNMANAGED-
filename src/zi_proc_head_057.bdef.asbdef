@@ -1,0 +1,66 @@
+unmanaged implementation in class zbp_i_proc_head_057 unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZI_PROC_HEAD_057 alias Header
+draft table zproc_head_d_057
+lock master total etag LocalLastChangedAt
+authorization master ( instance )
+{
+  create;
+  update;
+  delete;
+
+  association _Items { create; with draft; }
+
+  field ( readonly ) ProcurementUUID, TotalPrice, OverallStatus, TaxAmount;
+  field ( numbering : managed ) ProcurementUUID;
+
+  action ( features : instance ) approveOrder result [1] $self;
+
+  draft action Edit;
+  draft action Activate;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+  mapping for zproc_head_057
+  {
+    ProcurementUUID = proc_uuid;
+    ProcurementID = proc_id;
+    Description = description;
+    Supplier = supplier;
+    TotalPrice = total_price;
+    TaxAmount = tax_amount;
+    CurrencyCode = currency_code;
+    OverallStatus = overall_status;
+    LocalLastChangedAt = local_last_changed_at;
+  }
+}
+
+define behavior for ZI_PROC_ITEM_057 alias Item
+draft table zproc_item_d_057
+lock dependent by _Header
+authorization dependent by _Header
+{
+  update;
+  delete;
+
+  field ( readonly ) ProcurementUUID, ItemUUID, LineItemTotal;
+  field ( numbering : managed ) ItemUUID;
+
+  association _Header { with draft; }
+
+  mapping for zproc_item_057
+  {
+    ItemUUID = item_uuid;
+    ProcurementUUID = parent_uuid;
+    ItemPosition = item_pos;
+    Material = material;
+    Quantity = quantity;
+    Unit = unit;
+    Price = price;
+    CurrencyCode = currency_code;
+    LocalLastChangedAt = local_last_changed_at;
+  }
+}

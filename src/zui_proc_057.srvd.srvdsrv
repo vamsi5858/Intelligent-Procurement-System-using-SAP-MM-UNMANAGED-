@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service Definition for Procurement'
+define service ZUI_PROC_057 {
+  expose ZC_PROC_HEAD_057 as Header;
+  expose ZC_PROC_ITEM_057 as Item;
+}

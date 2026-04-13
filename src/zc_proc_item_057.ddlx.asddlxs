@@ -1,0 +1,35 @@
+@Metadata.layer: #CUSTOMER
+@UI: {
+  headerInfo: {
+    typeName: 'Item',
+    typeNamePlural: 'Items',
+    title: { type: #STANDARD, value: 'Material' }
+  }
+}
+annotate view ZC_PROC_ITEM_057 with
+{
+  @UI.facet: [ { id: 'ItemDetail', purpose: #STANDARD, type: #IDENTIFICATION_REFERENCE, label: 'Item Details', position: 10 } ]
+
+  @UI: { lineItem: [{ position: 10, label: 'Pos' }], identification: [{ position: 10, label: 'Position' }] }
+  ItemPosition;
+
+  @UI: { lineItem: [{ position: 20, label: 'Material' }], identification: [{ position: 20, label: 'Material' }] }
+  Material;
+
+  @UI: { lineItem: [{ position: 30, label: 'Quantity' }], identification: [{ position: 30, label: 'Quantity' }] }
+  Quantity;
+
+  @UI: { lineItem: [{ position: 40, label: 'Unit Price' }], identification: [{ position: 40, label: 'Unit Price' }] }
+  Price;
+
+  @UI: { lineItem: [{ position: 50, label: 'Line Total' }], identification: [{ position: 50, label: 'Line Total' }] }
+  LineItemTotal;
+
+  @UI: { lineItem: [{ position: 60, label: 'Delivery Date' }], identification: [{ position: 60, label: 'Delivery Date' }] }
+  DeliveryDate;
+
+  @UI.hidden: true
+  ItemUUID;
+  @UI.hidden: true
+  ProcurementUUID;
+}

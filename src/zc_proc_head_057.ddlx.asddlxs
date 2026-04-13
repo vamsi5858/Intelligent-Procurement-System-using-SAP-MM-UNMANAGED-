@@ -1,0 +1,35 @@
+@Metadata.layer: #CUSTOMER
+@UI: {
+  headerInfo: {
+    typeName: 'Procurement Order',
+    typeNamePlural: 'Procurement Orders',
+    title: { type: #STANDARD, label: 'Procurement Order', value: 'ProcurementID' }
+  }
+}
+annotate view ZC_PROC_HEAD_057 with
+{
+  @UI.facet: [
+    { id: 'HeaderInfo',  purpose: #STANDARD, type: #IDENTIFICATION_REFERENCE, label: 'General Info', position: 10 },
+    { id: 'LineItems',   purpose: #STANDARD, type: #LINEITEM_REFERENCE, label: 'Order Items', position: 20, targetElement: '_Items' }
+  ]
+
+  @UI: { lineItem: [{ position: 10, label: 'Order ID' }], identification: [{ position: 10, label: 'Order ID' }] }
+  ProcurementID;
+
+  @UI: { lineItem: [{ position: 20, label: 'Description' }], identification: [{ position: 20, label: 'Description' }] }
+  Description;
+
+  @UI: { lineItem: [{ position: 30, label: 'Supplier' }], identification: [{ position: 30, label: 'Supplier' }], selectionField: [{ position: 10 }] }
+  Supplier;
+
+  @UI: { lineItem: [{ position: 40, label: 'Total Price' }], identification: [{ position: 40, label: 'Total Price' }] }
+  TotalPrice;
+
+  @UI: { lineItem: [{ position: 50, label: 'Status' }], 
+         identification: [{ position: 50, label: 'Status' },
+                         { type: #FOR_ACTION, dataAction: 'approveOrder', label: 'Approve Order' }] }
+  OverallStatus;
+
+  @UI.hidden: true
+  ProcurementUUID;
+}
